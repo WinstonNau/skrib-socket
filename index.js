@@ -6,6 +6,12 @@ const io = require("socket.io")(server);
 
 io.on("connection", (socket) => {
   console.log("a user connected");
+  socket.on("playerJoined", (gameId, playerId, playerUsername) => {
+    socket.broadcast.emit("newPlayer", gameId, playerId, playerUsername);
+  });
+  socket.on("playerLeave", (gameId, playerId) => {
+    socket.broadcast.emit("playerDisconnect", gameId, playerId);
+  });
   socket.on("newPathDrawn", (path) => {
     socket.broadcast.emit("newPath", path);
   });
