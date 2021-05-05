@@ -12,14 +12,27 @@ io.on("connection", (socket) => {
   socket.on("playerLeave", (gameId, playerId) => {
     socket.broadcast.emit("playerDisconnect", gameId, playerId);
   });
-  socket.on("newPathDrawn", (path) => {
-    socket.broadcast.emit("newPath", path);
+  socket.on("newPathDrawn", (gameId, path) => {
+    socket.broadcast.emit("newPath", gameId, path);
   });
-  socket.on("clearReq", () => {
-    socket.broadcast.emit("clear");
+  socket.on("clearReq", (gameId) => {
+    socket.broadcast.emit("clear", gameId);
   });
-  socket.on("undoReq", () => {
-    socket.broadcast.emit("undo");
+  socket.on("undoReq", (gameId) => {
+    socket.broadcast.emit("undo", gameId);
+  });
+  socket.on("startGame", (gameId) => {
+    socket.broadcast.emit("gameStarted", gameId);
+  });
+  socket.on("selectWord", (gameId, word) => {
+    socket.broadcast.emit("wordSelected", gameId, word);
+  });
+  socket.on("wrongGuess", (gameId, guess) => {
+    socket.broadcast.emit("playerGuessedWrong", gameId, guess);
+  });
+  socket.on("correctGuess", (gameId, guess) => {
+    //TODO: Maybe define the next player? Or maybe define an order of players when the round starts?
+    socket.broadcast.emit("playerGuessedCorrect", gameId, guess);
   });
   socket.on("disconnect", () => {
     console.log("user disconnected");
