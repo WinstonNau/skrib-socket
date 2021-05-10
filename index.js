@@ -4,8 +4,8 @@ const http = require("http");
 const server = http.createServer(app);
 const io = require("socket.io")(server);
 
-let userMap = Map();
-let gamePlayersMap = Map();
+let userMap = new Map();
+let gamePlayersMap = new Map();
 
 io.on("connection", (socket) => {
   console.log("a user connected", socket.id);
