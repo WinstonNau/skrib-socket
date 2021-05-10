@@ -30,9 +30,9 @@ io.on("connection", (socket) => {
   socket.on("wrongGuess", (gameId, guess) => {
     socket.broadcast.emit("playerGuessedWrong", gameId, guess);
   });
-  socket.on("correctGuess", (gameId, guess) => {
+  socket.on("correctGuess", (gameId, playerUsername) => {
     //TODO: Maybe define the next player? Or maybe define an order of players when the round starts?
-    socket.broadcast.emit("playerGuessedCorrect", gameId, guess);
+    socket.broadcast.emit("playerGuessedCorrect", gameId, playerUsername);
   });
   socket.on("disconnect", () => {
     console.log("user disconnected");
