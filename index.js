@@ -5,7 +5,7 @@ const server = http.createServer(app);
 const io = require("socket.io")(server);
 
 io.on("connection", (socket) => {
-  console.log("a user connected", socket);
+  console.log("a user connected", socket.id);
   socket.on("playerJoined", (gameId, playerId, playerUsername) => {
     socket.broadcast.emit("newPlayer", gameId, playerId, playerUsername);
   });
@@ -35,7 +35,7 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("playerGuessedCorrect", gameId, playerUsername);
   });
   socket.on("disconnect", () => {
-    console.log("user disconnected", socket);
+    console.log("user disconnected", socket.id);
   });
 });
 
