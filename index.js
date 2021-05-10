@@ -27,7 +27,9 @@ io.on("connection", (socket) => {
   });
   socket.on("startGame", (gameId, users) => {
     gamePlayersMap.set(gameId, users);
-    console.log(gamePlayersMap.get(gameId));
+    console.log(
+      "Users: " + users + " gamePlayersMap: " + gamePlayersMap.get(gameId)
+    );
     socket.broadcast.emit("gameStarted", gameId);
   });
   socket.on("selectWord", (gameId, word) => {
