@@ -30,6 +30,9 @@ io.on("connection", (socket) => {
     console.log(
       "Users: " + users + " gamePlayersMap: " + gamePlayersMap.get(gameId)
     );
+    gamePlayersMap.forEach((u) => {
+      console.log(u);
+    });
     socket.broadcast.emit("gameStarted", gameId);
   });
   socket.on("selectWord", (gameId, word) => {
