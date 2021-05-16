@@ -34,10 +34,10 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("playerGuessedCorrect", gameId, playerUsername);
   });
   socket.on("gameIsOver", (gameId) => {
-    socket.emit("gameOver", gameId);
+    socket.broadcast.emit("gameOver", gameId);
   });
   socket.on("roundOver", (gameId, nextPlayer) => {
-    socket.emit("roundFinished", gameId, nextPlayer);
+    socket.broadcast.emit("roundFinished", gameId, nextPlayer);
   });
   socket.on("disconnect", () => {
     console.log("user disconnected", socket.id);
