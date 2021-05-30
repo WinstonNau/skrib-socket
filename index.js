@@ -21,6 +21,9 @@ io.on("connection", (socket) => {
   socket.on("undoReq", (gameId) => {
     socket.broadcast.emit("undo", gameId);
   });
+  socket.on("newRoundNumber", (gameId, roundNumber) => {
+    socket.broadcast.emit("roundNumberUpdated", gameId, roundNumber);
+  });
   socket.on("startGame", (gameId) => {
     socket.broadcast.emit("gameStarted", gameId);
   });
